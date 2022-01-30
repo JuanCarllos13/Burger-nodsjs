@@ -100,23 +100,23 @@ class OrderController {
             return response.status(400).json({ error: err.errors })
         }
 
-        const {admin: isAdmin} = await  User.findByPk(request.userId)
+        const { admin: isAdmin } = await User.findByPk(request.userId)
 
-        if(!isAdmin){
+        if (!isAdmin) {
             return response.status(400).json()
         }
 
         const { id } = request.params
         const { status } = request.body
 
-        try{
-            await Order.updateOne({_id: id}, {status})
-        }catch(error){
-            return response.status(400).json({error: error.message})
+        try {
+            await Order.updateOne({ _id: id }, { status })
+        } catch (error) {
+            return response.status(400).json({ error: error.message })
         }
-        
 
-        return response.json({message: "Status updated sucess"})
+
+        return response.json({ message: "Status updated sucess" })
     }
 }
 
